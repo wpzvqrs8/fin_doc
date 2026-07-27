@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
-import AmbientBackground    from './components/AmbientBackground'
-import Navbar               from './components/Navbar'
-import IntroFrameSequence   from './components/IntroFrameSequence'
-import VitalsBanner         from './components/VitalsBanner'
-import DashboardPanel       from './components/DashboardPanel'
-import AIPulsePanel         from './components/AIPulsePanel'
-import FeaturesSection      from './components/FeaturesSection'
-import HowItWorksSection    from './components/HowItWorksSection'
-import PricingSection       from './components/PricingSection'
-import Footer               from './components/Footer'
+import AmbientBackground from './components/AmbientBackground'
+import Navbar from './components/Navbar'
+import IntroFrameSequence from './components/IntroFrameSequence'
+import FeaturesSection from './components/FeaturesSection'
+import HowItWorksSection from './components/HowItWorksSection'
+import PricingSection from './components/PricingSection'
+import Footer from './components/Footer'
 
 /* ── HUD Toast System ── */
 function HudToast({ toast, onClose }) {
@@ -46,7 +43,7 @@ function CTASection() {
             <button className="btn-primary lg" id="cta-main">
               Start Free — No Card Required
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </button>
             <span className="cta-note">Setup takes under 5 minutes</span>
@@ -61,6 +58,26 @@ export default function App() {
   const [toasts, setToasts] = useState([])
   const [hasFiredToast, setHasFiredToast] = useState(false)
 
+  // Track mouse coordinates over white background sections for interactive dot matrix spotlight
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const dotSections = document.querySelectorAll('.light-dot-matrix, .white-bg-dot-matrix, .vitals-section, #dashboard, .features-section, .how-section, #how-it-works, .pricing-section, .cta-section, .site-footer, .slide-white')
+      dotSections.forEach(sec => {
+        const rect = sec.getBoundingClientRect()
+        // Only compute if section is visible in viewport
+        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+          const x = e.clientX - rect.left
+          const y = e.clientY - rect.top
+          sec.style.setProperty('--mouse-x', `${x}px`)
+          sec.style.setProperty('--mouse-y', `${y}px`)
+        }
+      })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   // ONLY fire the HUD toast alert when the user reaches the main content / command center section
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +85,6 @@ export default function App() {
       if (!dashboardEl || hasFiredToast) return
 
       const rect = dashboardEl.getBoundingClientRect()
-      // Fire when user reaches the dashboard section
       if (rect.top <= window.innerHeight * 0.75) {
         setHasFiredToast(true)
         setToasts(ts => [...ts, {
@@ -93,43 +109,10 @@ export default function App() {
         <Navbar />
 
         <main id="main-content">
-          {/* 1. Intro Frame Sequence: Giant morphing logo + Sticky Canvas Slides */}
+          {/* 1. Intro Frame Sequence + Command Center sticky slides */}
           <IntroFrameSequence />
 
-          {/* 2. Command Center / Dashboard (Main Content Section) */}
-          <section className="vitals-section" id="dashboard" aria-label="Financial dashboard">
-            <div className="section-container">
-              <div className="section-intro">
-                <div className="section-header-row">
-                  <div className="section-dot-label">
-                    <div className="section-dot" />
-                    <span className="section-dot-text">Command Center</span>
-                  </div>
-                  <div className="section-header-divider" />
-                  <span className="section-tag">metrics & live controls</span>
-                </div>
-
-                <div className="section-divider-line" />
-
-                <h2 className="section-display-title">
-                  Your Financial Cockpit
-                </h2>
-                <p className="section-display-sub">
-                  Live data, 30-day AI forecasting, and real-time scenario modeling in one view
-                </p>
-              </div>
-
-              <VitalsBanner />
-
-              {/* Dashboard Grid: Chart + AI Panel */}
-              <div className="dashboard-grid" style={{ marginTop: 24 }}>
-                <DashboardPanel />
-                <AIPulsePanel />
-              </div>
-            </div>
-          </section>
-
-          {/* 3. Features */}
+          {/* 2. Features */}
           <FeaturesSection />
 
           {/* 4. How It Works */}

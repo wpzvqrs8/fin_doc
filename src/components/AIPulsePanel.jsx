@@ -84,7 +84,7 @@ export default function AIPulsePanel() {
           <div style={{
             textAlign: 'center', color: 'var(--text-tertiary)',
             fontSize: 14, padding: '40px 16px',
-            fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+            fontFamily: 'var(--font-sans)', fontStyle: 'normal',
           }}>
             All clear — no active alerts
           </div>

@@ -3,6 +3,9 @@ import heroBgImage from '../img/image.png'
 import s1BgImage from '../img/s1.png'
 import s2BgImage from '../img/s2.jpg'
 import s3BgImage from '../img/s3.jpg'
+import demo1Img from '../img/demo_1.png'
+import demo2Img from '../img/demo_2.png'
+import demo3Img from '../img/demo_3.png'
 
 const MacOSDemo = lazy(() => import('./MacOSDemo'))
 
@@ -293,61 +296,49 @@ export default function IntroFrameSequence() {
                 </p>
               </div>
 
-              {/* ── RIGHT COLUMN: Robot Head, Launch Button & Footnote ── */}
+              {/* ── RIGHT COLUMN: 3D Tilted Demo Gallery, Launch Button & Footnote ── */}
               <div className="demo-cta-right-col">
-                {/* Robot Head Preview */}
-                <div className="demo-cta-bot-preview" aria-hidden="true">
-                  <div className="mac-robot-head-traced preview-scale">
-                    <div className="mac-robot-head">
-                      <div className="mac-robot-antenna">
-                        <div className="mac-robot-antenna-stem" />
-                        <div className="mac-robot-antenna-orb" />
-                      </div>
-                      <div className="mac-robot-ear left" />
-                      <div className="mac-robot-ear right" />
-                      <div className="mac-robot-face">
-                        <div className="mac-robot-top-plate" />
-                        <div className="mac-robot-visor">
-                          <div className="mac-robot-visor-inner">
-                            <div className="mac-bot-eyes-row">
-                              <div className="mac-bot-eye-wrap">
-                                <div className="mac-bot-eyeball">
-                                  <div className="mac-bot-pupil"><div className="mac-bot-shine" /></div>
-                                </div>
-                              </div>
-                              <div className="mac-bot-eye-wrap">
-                                <div className="mac-bot-eyeball">
-                                  <div className="mac-bot-pupil"><div className="mac-bot-shine" /></div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="mac-robot-smile">
-                              <svg width="22" height="10" viewBox="0 0 28 14" fill="none">
-                                <path d="M4 3 C8 11 20 11 24 3" stroke="#FF6B35" strokeWidth="3" strokeLinecap="round" />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                {/* 3D Tilted Demo Image Gallery (Left tilted -> Center larger -> Right tilted) */}
+                <div className="demo-3d-gallery-container" aria-hidden="true">
+                  <div className="demo-3d-gallery-stage">
+                    {/* Left Tilted Image (demo_2.png) */}
+                    <div className="demo-3d-card side left">
+                      <img src={demo2Img} alt="Demo Preview Left" />
+                    </div>
+
+                    {/* Center Main Image - Slightly Bigger (demo_1.png) */}
+                    <div className="demo-3d-card center">
+                      <img src={demo1Img} alt="Demo Preview Main Center" />
+                    </div>
+
+                    {/* Right Tilted Image (demo_3.png) */}
+                    <div className="demo-3d-card side right">
+                      <img src={demo3Img} alt="Demo Preview Right" />
                     </div>
                   </div>
                 </div>
 
-                {/* High-End State-of-the-Art CTA Launch Button */}
+                {/* Swiss Bauhaus Styled CTA Button */}
                 <button
-                  className="demo-launch-btn"
+                  className="swiss-bauhaus-btn"
                   id="get-demo-btn"
                   onClick={() => setDemoOpen(true)}
                   aria-label="Launch virtual macOS demo"
                 >
-                  <span className="demo-btn-icon-orb">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="8 5 19 12 8 19 8 5" />
-                    </svg>
-                  </span>
-                  <span className="demo-btn-text">Get a Demo</span>
-                  <span className="demo-btn-badge">INTERACTIVE</span>
-                  <div className="demo-btn-shimmer" />
+                  {/* Fill Wipe Background */}
+                  <div className="swiss-btn-fill-wipe" />
+
+                  {/* Inner Content Area */}
+                  <div className="swiss-btn-inner">
+                    {/* Icon Container */}
+                    <div className="swiss-btn-icon-square">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M3 2L9 6L3 10V2Z" fill="#0A0A0A" />
+                      </svg>
+                    </div>
+                    {/* Main Text */}
+                    <span className="swiss-btn-text">Get a Demo</span>
+                  </div>
                 </button>
 
                 <p className="demo-cta-footnote">Opens a virtual macOS environment · No downloads · Instant access</p>

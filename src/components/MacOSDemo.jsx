@@ -1,25 +1,43 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import wallpaperImg from '../img/wallpaper2.jpg'
 
-/* ── REAL ICON URLs ── */
+import finderImg from '../img/finder.png'
+import launchpadImg from '../img/launchpad.png'
+import chatgptImg from '../img/chatgpt.png'
+import claudeImg from '../img/claude.png'
+import safariImg from '../img/safari.png'
+import messagesImg from '../img/messages.png'
+import mailImg from '../img/mail.png'
+import mapsImg from '../img/maps.png'
+import photosImg from '../img/photos.png'
+import musicImg from '../img/music.png'
+import podcastsImg from '../img/podcasts.png'
+import appletvImg from '../img/tv.png'
+import appstoreImg from '../img/appstore.png'
+import notesImg from '../img/notes.png'
+import vscodeImg from '../img/vscode.png'
+import settingsImg from '../img/settings.png'
+import steamImg from '../img/steam.png'
+
+/* ── REAL ICON URLs (LOCAL ASSETS) ── */
 const ICON_URLS = {
-  finder: 'https://www.evrything.ai/app-icons/finder.png',
-  launchpad: 'https://www.evrything.ai/app-icons/launchpad.png',
-  chatgpt: 'https://www.evrything.ai/app-icons/chatgpt.png',
-  claude: 'https://www.evrything.ai/app-icons/claude.png',
-  safari: 'https://www.evrything.ai/app-icons/safari.png',
-  messages: 'https://www.evrything.ai/app-icons/messages.png',
-  mail: 'https://www.evrything.ai/app-icons/mail.png',
-  maps: 'https://www.evrything.ai/app-icons/maps.png',
-  photos: 'https://www.evrything.ai/app-icons/photos.png',
-  music: 'https://www.evrything.ai/app-icons/music.png',
-  podcasts: 'https://www.evrything.ai/app-icons/podcasts.png',
-  appletv: 'https://www.evrything.ai/app-icons/tv.png',
-  appstore: 'https://www.evrything.ai/app-icons/appstore.png',
-  notes: 'https://www.evrything.ai/app-icons/notes.png',
-  vscode: 'https://www.evrything.ai/app-icons/vscode.png',
-  settings: 'https://www.evrything.ai/app-icons/settings.png',
-  steam: 'https://www.evrything.ai/app-icons/steam.png',
+  finder: finderImg,
+  launchpad: launchpadImg,
+  chatgpt: chatgptImg,
+  claude: claudeImg,
+  safari: safariImg,
+  messages: messagesImg,
+  mail: mailImg,
+  maps: mapsImg,
+  photos: photosImg,
+  music: musicImg,
+  podcasts: podcastsImg,
+  appletv: appletvImg,
+  appstore: appstoreImg,
+  notes: notesImg,
+  vscode: vscodeImg,
+  settings: settingsImg,
+  steam: steamImg,
 }
 
 /* ── DOCK ICON DEFINITIONS ── */

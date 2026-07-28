@@ -9,11 +9,6 @@ const FEATURES = [
     subtitle: 'Real-time multi-source data streaming',
     desc: 'Automated sync with Stripe, Plaid, and bank webhooks. Every transaction categorized via vector embeddings — zero manual entry required.',
     tags: ['Stripe', 'Plaid', 'Webhooks', 'Vector Embeddings'],
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-      </svg>
-    ),
     accentColor: '#FF4500',
     metric: '100% Auto-Sync'
   },
@@ -25,11 +20,6 @@ const FEATURES = [
     subtitle: 'Zero-hallucination computation core',
     desc: 'Deterministic computation. Z-score anomaly detection spots vendor price creep. The LLM never touches raw numbers — zero hallucination risk.',
     tags: ['Deterministic', 'Z-Score', 'SQL', 'Zero-Hallucination'],
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M4 19l4-14 4 14 4-14 4 14" />
-      </svg>
-    ),
     accentColor: '#FF4500',
     metric: 'Z = (X - μ) / σ'
   },
@@ -41,11 +31,6 @@ const FEATURES = [
     subtitle: '30-day cash deficit simulation',
     desc: "Rolling 30-day cash simulation adjusted for each client's historical payment lag. Payroll shortfalls detected days in advance — automatically.",
     tags: ['Forecasting', 'Risk Scoring', 'Heuristic', 'Runway Model'],
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 3v18h18M18 9l-5 5-2-2-4 4" />
-      </svg>
-    ),
     accentColor: '#FF4500',
     metric: '30-Day Forecast'
   },
@@ -57,11 +42,6 @@ const FEATURES = [
     subtitle: 'Natural language communication',
     desc: 'Fast LLM receives pre-calculated JSON payloads and generates plain-English alerts, WhatsApp messages, and 1-click payment reminders.',
     tags: ['GPT-4o-mini', 'WhatsApp', 'Twilio', '1-Click Links'],
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      </svg>
-    ),
     accentColor: '#FF4500',
     metric: 'Sub-second Dispatch'
   },
@@ -115,22 +95,19 @@ export default function FeaturesSection() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 tabIndex={0}
               >
-                {/* Card Header Pill & Badge */}
+                {/* Card Header Architectural Tag & Badge */}
                 <div className="flat-card-top">
-                  <div className="flat-card-pill">
-                    <span className="flat-card-num">{f.num}</span>
-                    <span className="flat-card-layer">{f.layer}</span>
+                  <div className="flat-card-arch-tag">
+                    <span className="arch-num">{f.num}</span>
+                    <span className="arch-layer">{f.layer}</span>
                   </div>
                   <span className="flat-card-badge">{f.badge}</span>
                 </div>
 
-                {/* Card Icon & Titles */}
+                {/* Card Titles */}
                 <div className="flat-card-body">
-                  <div className="flat-card-icon">
-                    {f.icon}
-                  </div>
-                  <h3 className="flat-card-title">{f.title}</h3>
                   <span className="flat-card-sub">{f.subtitle}</span>
+                  <h3 className="flat-card-title">{f.title}</h3>
 
                   {/* Hidden initially; Expands vertically & reveals full text on hover! */}
                   <div className="flat-card-expandable-desc">

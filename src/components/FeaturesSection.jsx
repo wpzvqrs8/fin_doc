@@ -99,14 +99,18 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        {/* ── EXPANDABLE COMPACT 3:2 CARDS GRID ── */}
+        {/* ── FLAT HORIZONTAL SIDE-BY-SIDE CARDS GRID ── */}
         <div className="flat-cards-grid">
           {FEATURES.map((f, i) => {
             const isHovered = hoveredIndex === i
+            let originClass = 'origin-center'
+            if (i === 0) originClass = 'origin-left'
+            if (i === FEATURES.length - 1) originClass = 'origin-right'
+
             return (
               <div
                 key={f.num}
-                className={`flat-feature-card ${isHovered ? 'is-hovered' : ''}`}
+                className={`flat-feature-card ${originClass} ${isHovered ? 'is-hovered' : ''}`}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 tabIndex={0}
@@ -120,18 +124,14 @@ export default function FeaturesSection() {
                   <span className="flat-card-badge">{f.badge}</span>
                 </div>
 
-                {/* Card Icon & Core Titles */}
+                {/* Card Icon & Body */}
                 <div className="flat-card-body">
                   <div className="flat-card-icon">
                     {f.icon}
                   </div>
                   <h3 className="flat-card-title">{f.title}</h3>
                   <span className="flat-card-sub">{f.subtitle}</span>
-
-                  {/* Expanded Detailed Description (Reveals smoothly on hover!) */}
-                  <div className="flat-card-expandable-desc">
-                    <p className="flat-card-desc">{f.desc}</p>
-                  </div>
+                  <p className="flat-card-desc">{f.desc}</p>
                 </div>
 
                 {/* Card Footer Metric & Tags */}
@@ -139,12 +139,10 @@ export default function FeaturesSection() {
                   <div className="flat-card-metric">
                     {f.metric}
                   </div>
-                  <div className="flat-card-expandable-tags">
-                    <div className="flat-card-tags">
-                      {f.tags.slice(0, 3).map(t => (
-                        <span key={t} className="flat-tag">{t}</span>
-                      ))}
-                    </div>
+                  <div className="flat-card-tags">
+                    {f.tags.slice(0, 3).map(t => (
+                      <span key={t} className="flat-tag">{t}</span>
+                    ))}
                   </div>
                 </div>
               </div>

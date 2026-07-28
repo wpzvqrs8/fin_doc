@@ -10,7 +10,7 @@ const FEATURES = [
     desc: 'Automated sync with Stripe, Plaid, and bank webhooks. Every transaction categorized via vector embeddings — zero manual entry required.',
     tags: ['Stripe', 'Plaid', 'Webhooks', 'Vector Embeddings'],
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
     ),
@@ -26,7 +26,7 @@ const FEATURES = [
     desc: 'Deterministic computation. Z-score anomaly detection spots vendor price creep. The LLM never touches raw numbers — zero hallucination risk.',
     tags: ['Deterministic', 'Z-Score', 'SQL', 'Zero-Hallucination'],
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M4 19l4-14 4 14 4-14 4 14" />
       </svg>
     ),
@@ -42,7 +42,7 @@ const FEATURES = [
     desc: "Rolling 30-day cash simulation adjusted for each client's historical payment lag. Payroll shortfalls detected days in advance — automatically.",
     tags: ['Forecasting', 'Risk Scoring', 'Heuristic', 'Runway Model'],
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M3 3v18h18M18 9l-5 5-2-2-4 4" />
       </svg>
     ),
@@ -58,7 +58,7 @@ const FEATURES = [
     desc: 'Fast LLM receives pre-calculated JSON payloads and generates plain-English alerts, WhatsApp messages, and 1-click payment reminders.',
     tags: ['GPT-4o-mini', 'WhatsApp', 'Twilio', '1-Click Links'],
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
       </svg>
     ),
@@ -99,7 +99,7 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        {/* ── FLAT HORIZONTAL SIDE-BY-SIDE CARDS GRID ── */}
+        {/* ── EXPANDABLE COMPACT 3:2 CARDS GRID ── */}
         <div className="flat-cards-grid">
           {FEATURES.map((f, i) => {
             const isHovered = hoveredIndex === i
@@ -120,14 +120,18 @@ export default function FeaturesSection() {
                   <span className="flat-card-badge">{f.badge}</span>
                 </div>
 
-                {/* Card Icon & Titles */}
+                {/* Card Icon & Core Titles */}
                 <div className="flat-card-body">
                   <div className="flat-card-icon">
                     {f.icon}
                   </div>
                   <h3 className="flat-card-title">{f.title}</h3>
                   <span className="flat-card-sub">{f.subtitle}</span>
-                  <p className="flat-card-desc">{f.desc}</p>
+
+                  {/* Expanded Detailed Description (Reveals smoothly on hover!) */}
+                  <div className="flat-card-expandable-desc">
+                    <p className="flat-card-desc">{f.desc}</p>
+                  </div>
                 </div>
 
                 {/* Card Footer Metric & Tags */}
@@ -135,10 +139,12 @@ export default function FeaturesSection() {
                   <div className="flat-card-metric">
                     {f.metric}
                   </div>
-                  <div className="flat-card-tags">
-                    {f.tags.slice(0, 3).map(t => (
-                      <span key={t} className="flat-tag">{t}</span>
-                    ))}
+                  <div className="flat-card-expandable-tags">
+                    <div className="flat-card-tags">
+                      {f.tags.slice(0, 3).map(t => (
+                        <span key={t} className="flat-tag">{t}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

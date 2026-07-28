@@ -99,7 +99,7 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        {/* ── FLAT HORIZONTAL SIDE-BY-SIDE CARDS GRID ── */}
+        {/* ── EXPANDABLE FLAT CARDS GRID ── */}
         <div className="flat-cards-grid">
           {FEATURES.map((f, i) => {
             const isHovered = hoveredIndex === i
@@ -124,14 +124,18 @@ export default function FeaturesSection() {
                   <span className="flat-card-badge">{f.badge}</span>
                 </div>
 
-                {/* Card Icon & Body */}
+                {/* Card Icon & Titles */}
                 <div className="flat-card-body">
                   <div className="flat-card-icon">
                     {f.icon}
                   </div>
                   <h3 className="flat-card-title">{f.title}</h3>
                   <span className="flat-card-sub">{f.subtitle}</span>
-                  <p className="flat-card-desc">{f.desc}</p>
+
+                  {/* Hidden initially; Expands vertically & reveals full text on hover! */}
+                  <div className="flat-card-expandable-desc">
+                    <p className="flat-card-desc">{f.desc}</p>
+                  </div>
                 </div>
 
                 {/* Card Footer Metric & Tags */}

@@ -68,7 +68,7 @@ const FEATURES = [
 ]
 
 export default function FeaturesSection() {
-  const [hoveredStackIndex, setHoveredStackIndex] = useState(null)
+  const [hoveredIndex, setHoveredIndex] = useState(null)
 
   return (
     <section className="features-section" id="features" aria-labelledby="features-heading">
@@ -99,61 +99,51 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        {/* ── LEFT-TO-RIGHT OVERLAPPING CARDS TRACK ── */}
-        <div className="h-overlap-stage">
-          <div className="h-overlap-container">
-            {FEATURES.map((f, i) => {
-              const isHovered = hoveredStackIndex === i
-              return (
-                <div
-                  key={f.num}
-                  className={`h-overlap-card ${isHovered ? 'is-hovered' : ''}`}
-                  onMouseEnter={() => setHoveredStackIndex(i)}
-                  onMouseLeave={() => setHoveredStackIndex(null)}
-                  style={{
-                    '--card-idx': i,
-                    '--accent': f.accentColor,
-                    zIndex: isHovered ? 100 : i * 10 + 10
-                  }}
-                  tabIndex={0}
-                >
-                  {/* Top Meta Bar */}
-                  <div className="hol-top-bar" style={{ borderColor: f.accentColor }}>
-                    <div className="hol-pill" style={{ borderColor: f.accentColor }}>
-                      <span className="hol-num" style={{ color: f.accentColor }}>{f.num}</span>
-                      <span className="hol-layer">{f.layer}</span>
-                    </div>
-                    <span className="hol-badge">{f.badge}</span>
+        {/* ── FLAT HORIZONTAL SIDE-BY-SIDE CARDS GRID ── */}
+        <div className="flat-cards-grid">
+          {FEATURES.map((f, i) => {
+            const isHovered = hoveredIndex === i
+            return (
+              <div
+                key={f.num}
+                className={`flat-feature-card ${isHovered ? 'is-hovered' : ''}`}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                tabIndex={0}
+              >
+                {/* Card Header Pill & Badge */}
+                <div className="flat-card-top">
+                  <div className="flat-card-pill">
+                    <span className="flat-card-num">{f.num}</span>
+                    <span className="flat-card-layer">{f.layer}</span>
                   </div>
-
-                  {/* Main Content */}
-                  <div className="hol-main-body">
-                    <div className="hol-icon-box" style={{ color: f.accentColor, borderColor: f.accentColor }}>
-                      {f.icon}
-                    </div>
-                    <h3 className="hol-title">{f.title}</h3>
-                    <span className="hol-sub">{f.subtitle}</span>
-                    <p className="hol-desc">{f.desc}</p>
-                  </div>
-
-                  {/* Footer Tags & Metric */}
-                  <div className="hol-footer">
-                    <div className="hol-metric-pill" style={{ color: f.accentColor, borderColor: f.accentColor }}>
-                      {f.metric}
-                    </div>
-                    <div className="hol-tags-row">
-                      {f.tags.slice(0, 3).map(t => (
-                        <span key={t} className="hol-tag">{t}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Book Spine Edge Accent */}
-                  {/* <div className="hol-edge-bar" style={{ background: f.accentColor }} /> */}
+                  <span className="flat-card-badge">{f.badge}</span>
                 </div>
-              )
-            })}
-          </div>
+
+                {/* Card Icon & Titles */}
+                <div className="flat-card-body">
+                  <div className="flat-card-icon">
+                    {f.icon}
+                  </div>
+                  <h3 className="flat-card-title">{f.title}</h3>
+                  <span className="flat-card-sub">{f.subtitle}</span>
+                  <p className="flat-card-desc">{f.desc}</p>
+                </div>
+
+                {/* Card Footer Metric & Tags */}
+                <div className="flat-card-footer">
+                  <div className="flat-card-metric">
+                    {f.metric}
+                  </div>
+                  <div className="flat-card-tags">
+                    {f.tags.slice(0, 3).map(t => (
+                      <span key={t} className="flat-tag">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
 
       </div>

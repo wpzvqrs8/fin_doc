@@ -136,6 +136,7 @@ export default function Navbar() {
             <div className="menu-drawer-header">
               <div className="menu-drawer-brand">
                 <LogoIcon size={26} color="#FF4500" />
+                
                 <span>FIN_DOC</span>
               </div>
             </div>

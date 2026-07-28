@@ -3107,7 +3107,8 @@ body {
   .portal-nav-item { justify-content: center; padding: 9px 0; }
   .portal-metrics-grid { grid-template-columns: 1fr 1fr; }
   .portal-grid-two { grid-template-columns: 1fr; }
-}ustify-content: center; padding: 9px 0; }
-  .portal-metrics-grid { grid-template-columns: 1fr 1fr; }
-  .portal-grid-two { grid-template-columns: 1fr; }
+}
+.portal-actions {
+  justify-content: center;
+  padding: 9px 0;
 }

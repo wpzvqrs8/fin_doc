@@ -493,7 +493,7 @@ body {
   background-position: 0 0;
 }
 
-/* Mouse Hover Highlight Spotlight (~20px-45px radius highlight around cursor) */
+/* Mouse Hover Highlight Spotlight (Softened 1.3px size, 0.38 opacity around cursor) */
 .light-dot-matrix::before,
 .white-bg-dot-matrix::before,
 .vitals-section::before,
@@ -510,18 +510,18 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  /* Highlighted Orange Dots under Cursor Spotlight (1.8px size, 0.75 opacity) */
-  background-image: radial-gradient(circle, rgba(255, 69, 0, 0.75) 1.8px, transparent 1.8px);
+  /* Softened Orange Dots under Cursor Spotlight (1.3px size, lowered 0.38 opacity) */
+  background-image: radial-gradient(circle, rgba(255, 69, 0, 0.38) 1.3px, transparent 1.3px);
   background-size: 34px 34px;
   background-position: 0 0;
-  /* Spotlight Radial Mask centered under mouse position */
-  mask-image: radial-gradient(circle 45px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
-  -webkit-mask-image: radial-gradient(circle 45px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
+  /* Refined 38px Spotlight Radial Mask */
+  mask-image: radial-gradient(circle 38px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle 38px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 
-/* Subtle Ambient Soft Orange Glow around Cursor Spotlight */
+/* Very Subtle Ambient Orange Glow around Cursor Spotlight */
 .light-dot-matrix::after,
 .white-bg-dot-matrix::after,
 .vitals-section::after,
@@ -538,7 +538,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(circle 50px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(255, 69, 0, 0.08) 0%, transparent 75%);
+  background: radial-gradient(circle 42px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(255, 69, 0, 0.025) 0%, transparent 75%);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -4073,18 +4073,18 @@ body {
   overflow: hidden;
 }
 
-/* Mouse Hover Highlight Spotlight on white bg (1.8px size, 0.75 opacity) */
+/* Mouse Hover Highlight Spotlight on white bg (Softened 1.3px size, 0.38 opacity) */
 .site-loader-overlay::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background-image: radial-gradient(circle, rgba(255, 69, 0, 0.75) 1.8px, transparent 1.8px);
+  background-image: radial-gradient(circle, rgba(255, 69, 0, 0.38) 1.3px, transparent 1.3px);
   background-size: 34px 34px;
   background-position: 0 0;
-  mask-image: radial-gradient(circle 65px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
-  -webkit-mask-image: radial-gradient(circle 65px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
+  mask-image: radial-gradient(circle 38px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle 38px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 0%, transparent 100%);
   opacity: 1;
   transition: opacity 0.2s ease;
 }
@@ -4095,7 +4095,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(circle 75px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(255, 69, 0, 0.08) 0%, transparent 75%);
+  background: radial-gradient(circle 42px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(255, 69, 0, 0.025) 0%, transparent 75%);
   opacity: 1;
   transition: opacity 0.2s ease;
 }

@@ -72,13 +72,16 @@ body {
 /* ── Ambient (none in this theme) ── */
 .ambient-bg { display: none; }
 
-/* ── DISTORTED BLUR NAVBAR (No visible border line · 100% Glass Blur) ── */
+/* ── DISTORTED BLUR NAVBAR (100% Transparent Glass Blur · No Dark Color) ── */
 .distorted-blur-navbar {
   position: fixed; top: 0; left: 0; right: 0; height: 42px; /* Lowered in height by 10px */
-  z-index: 250; background: transparent;
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  z-index: 250;
+  background: transparent;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
   border-bottom: none;
+  isolation: isolate;
+  will-change: transform, opacity, backdrop-filter;
 }
 .distorted-navbar-inner {
   max-width: 1680px; margin: 0 auto; height: 100%;
@@ -2607,6 +2610,102 @@ body {
   overflow: hidden;
   user-select: none;
   cursor: default;
+}
+
+/* ── macOS WALLPAPER (wallpaper2.jpg) ── */
+.mac-wallpaper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mac-wallpaper-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.38) 100%);
+  pointer-events: none;
+}
+
+/* ── APPLE STYLE LOADER FOR macOS VOS ── */
+.apple-loader-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 99999;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: all;
+}
+
+.apple-loader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.apple-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  color: #FFFFFF;
+}
+
+.apple-loader-logo {
+  opacity: 0.95;
+  filter: drop-shadow(0 2px 10px rgba(255,255,255,0.2));
+}
+
+.apple-spinner {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.apple-spinner-spoke {
+  position: absolute;
+  top: 0;
+  left: 14.5px;
+  width: 3px;
+  height: 9px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  transform-origin: 1.5px 16px;
+  animation: apple-spoke-fade 1s linear infinite;
+}
+
+.apple-spinner-spoke:nth-child(1)  { animation-delay: -0.916s; }
+.apple-spinner-spoke:nth-child(2)  { animation-delay: -0.833s; }
+.apple-spinner-spoke:nth-child(3)  { animation-delay: -0.750s; }
+.apple-spinner-spoke:nth-child(4)  { animation-delay: -0.666s; }
+.apple-spinner-spoke:nth-child(5)  { animation-delay: -0.583s; }
+.apple-spinner-spoke:nth-child(6)  { animation-delay: -0.500s; }
+.apple-spinner-spoke:nth-child(7)  { animation-delay: -0.416s; }
+.apple-spinner-spoke:nth-child(8)  { animation-delay: -0.333s; }
+.apple-spinner-spoke:nth-child(9)  { animation-delay: -0.250s; }
+.apple-spinner-spoke:nth-child(10) { animation-delay: -0.166s; }
+.apple-spinner-spoke:nth-child(11) { animation-delay: -0.083s; }
+.apple-spinner-spoke:nth-child(12) { animation-delay: 0s; }
+
+@keyframes apple-spoke-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0.15; }
 }
 
 .mac-menubar {

@@ -1069,6 +1069,24 @@ function MacDock({ onIconClick, hoveredIndex, setHoveredIndex }) {
   )
 }
 
+/* ── APPLE STYLE LOADER COMPONENT ── */
+function AppleLoader({ isFading }) {
+  return (
+    <div className={`apple-loader-overlay ${isFading ? 'fade-out' : ''}`}>
+      <div className="apple-loader-content">
+        <svg width="40" height="48" viewBox="0 0 814 1000" fill="white" className="apple-loader-logo">
+          <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-127.4C46 790.8 0 663.5 0 541.8 0 347.5 130.2 244.2 258.2 244.2c67.5 0 124.3 44.8 166.5 44.8s109.3-47.6 187.6-47.6c30.5 0 133 2.6 191.5 104.7zm-167.1-120.9c31.2-37.1 53.1-88.3 53.1-139.5 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-70.6z" />
+        </svg>
+        <div className="apple-spinner" aria-label="Loading macOS">
+          {[...Array(12)].map((_, i) => (
+            <div key={i} className="apple-spinner-spoke" style={{ transform: `rotate(${i * 30}deg)` }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ── MAIN macOS DEMO COMPONENT ── */
 export default function MacOSDemo({ onClose }) {
   const time = useClockTime()
@@ -1079,6 +1097,35 @@ export default function MacOSDemo({ onClose }) {
   const [smileState, setSmileState] = useState('happy') // 'idle' | 'wrong' | 'happy'
   const [dockHovered, setDockHovered] = useState(null)
   const userInteractedRef = useRef(false)
+
+  // Wallpaper loading & Apple loader state
+  const [wallpaperLoaded, setWallpaperLoaded] = useState(false)
+  const [isLoaderFading, setIsLoaderFading] = useState(false)
+  const [showLoader, setShowLoader] = useState(true)
+
+  useEffect(() => {
+    let mounted = true
+    const img = new Image()
+    img.src = wallpaperImg
+
+    const handleLoad = () => {
+      if (!mounted) return
+      setWallpaperLoaded(true)
+      setIsLoaderFading(true)
+      setTimeout(() => {
+        if (mounted) setShowLoader(false)
+      }, 400)
+    }
+
+    if (img.complete) {
+      handleLoad()
+    } else {
+      img.onload = handleLoad
+      img.onerror = handleLoad
+    }
+
+    return () => { mounted = false }
+  }, [])
 
   // 6 second inactivity prompt if user hasn't clicked any app
   useEffect(() => {
@@ -1115,6 +1162,9 @@ export default function MacOSDemo({ onClose }) {
 
   return (
     <div className="mac-overlay" aria-modal="true" role="dialog" aria-label="Virtual macOS Demo">
+      {/* Apple Loader shown while wallpaper2 image is loading */}
+      {showLoader && <AppleLoader isFading={isLoaderFading} />}
+
       {/* Wallpaper */}
       <div className="mac-wallpaper" style={{ backgroundImage: `url(${wallpaperImg})` }} />
       <div className="mac-wallpaper-overlay" />

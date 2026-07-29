@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { preloadSiteImages } from './utils/imagePreloader'
 import AmbientBackground from './components/AmbientBackground'
 import Navbar from './components/Navbar'
 import IntroFrameSequence from './components/IntroFrameSequence'
@@ -36,6 +37,11 @@ function CTASection() {
 }
 
 export default function App() {
+  // Preload all site images as soon as the site loads (first hero image loads fastest)
+  useEffect(() => {
+    preloadSiteImages()
+  }, [])
+
   // Track mouse coordinates over white background sections for interactive dot matrix spotlight
   useEffect(() => {
     const handleMouseMove = (e) => {

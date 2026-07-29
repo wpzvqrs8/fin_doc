@@ -4,11 +4,18 @@ import { preloadAllSiteAssets } from '../utils/imagePreloader'
 export default function SiteLoader() {
   const [isLoading, setIsLoading] = useState(true)
   const [isFadingOut, setIsFadingOut] = useState(false)
+  const [mousePos, setMousePos] = useState({ x: -500, y: -500 })
 
   useEffect(() => {
-    // Start preloading all images and tracking document state
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY })
+    }
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
+  useEffect(() => {
     preloadAllSiteAssets().then(() => {
-      // Small minimum display to avoid layout flickering
       setTimeout(() => {
         setIsFadingOut(true)
         setTimeout(() => {
@@ -21,20 +28,16 @@ export default function SiteLoader() {
   if (!isLoading) return null
 
   return (
-    <div className={`site-loader-overlay ${isFadingOut ? 'fade-out' : ''}`} aria-hidden={isFadingOut}>
-      <div className="site-loader-content">
-        <div className="site-loader-brand">
-          <span className="site-loader-dot" />
-          <span className="site-loader-brand-text">FIN_DOC</span>
-        </div>
-
-        {/* User's Orange Dotted Morphing Animation */}
-        <div className="loader" aria-label="Loading website assets" />
-
-        <div className="site-loader-status">
-          <span>INITIALIZING PLATFORM</span>
-        </div>
-      </div>
+    <div
+      className={`site-loader-overlay ${isFadingOut ? 'fade-out' : ''}`}
+      style={{
+        '--mouse-x': `${mousePos.x}px`,
+        '--mouse-y': `${mousePos.y}px`
+      }}
+      aria-hidden={isFadingOut}
+    >
+      {/* Bigger Animated Orange Loading Dots (No text or logo) */}
+      <div className="loader" aria-label="Loading site" />
     </div>
   )
 }

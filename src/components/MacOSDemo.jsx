@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { preloadMacOSAssets } from '../utils/imagePreloader'
 import wallpaperImg from '../img/wallpaper2.jpg'
 
 import finderImg from '../img/finder.png'
@@ -1105,24 +1106,15 @@ export default function MacOSDemo({ onClose }) {
 
   useEffect(() => {
     let mounted = true
-    const img = new Image()
-    img.src = wallpaperImg
 
-    const handleLoad = () => {
+    preloadMacOSAssets().then(() => {
       if (!mounted) return
       setWallpaperLoaded(true)
       setIsLoaderFading(true)
       setTimeout(() => {
         if (mounted) setShowLoader(false)
       }, 400)
-    }
-
-    if (img.complete) {
-      handleLoad()
-    } else {
-      img.onload = handleLoad
-      img.onerror = handleLoad
-    }
+    })
 
     return () => { mounted = false }
   }, [])

@@ -58,7 +58,7 @@ export function preloadSiteImages() {
   }
   heroImage.src = ALL_SITE_IMAGES.hero
 
-  // 2. Preload remaining sequence slides
+  // 2. Preload remaining sequence slides & demo gallery previews (Main website assets only)
   const sequenceImages = [
     ALL_SITE_IMAGES.s1,
     ALL_SITE_IMAGES.s2,
@@ -72,22 +72,11 @@ export function preloadSiteImages() {
     const img = new Image()
     img.src = src
   })
-
-  // 3. Preload macOS VOS Wallpaper & Dock Icons so demo opens instantly
-  const vosImages = [
-    ALL_SITE_IMAGES.wallpaper,
-    ...ALL_SITE_IMAGES.dockIcons
-  ]
-
-  vosImages.forEach(src => {
-    const img = new Image()
-    img.src = src
-  })
 }
 
 /**
- * Preloads all site assets (hero, sequence slides, wallpaper, dock icons)
- * and returns a promise that resolves when all images AND document readyState complete.
+ * Preloads main website assets ONLY (hero, sequence slides, demo previews).
+ * macOS assets are excluded and loaded lazily when "Get a Demo" is clicked.
  */
 export function preloadAllSiteAssets(onProgress) {
   if (typeof window === 'undefined') return Promise.resolve()
@@ -99,9 +88,7 @@ export function preloadAllSiteAssets(onProgress) {
     ALL_SITE_IMAGES.s3,
     ALL_SITE_IMAGES.demo1,
     ALL_SITE_IMAGES.demo2,
-    ALL_SITE_IMAGES.demo3,
-    ALL_SITE_IMAGES.wallpaper,
-    ...ALL_SITE_IMAGES.dockIcons
+    ALL_SITE_IMAGES.demo3
   ]
 
   let loadedCount = 0
@@ -139,4 +126,27 @@ export function preloadAllSiteAssets(onProgress) {
     safetyTimeout
   ])
 }
+
+/**
+ * Preloads virtual macOS assets (wallpaper & dock icons) when "Get a Demo" is launched.
+ */
+export function preloadMacOSAssets() {
+  if (typeof window === 'undefined') return Promise.resolve()
+
+  const macosImages = [
+    ALL_SITE_IMAGES.wallpaper,
+    ...ALL_SITE_IMAGES.dockIcons
+  ]
+
+  const promises = macosImages.map(src => {
+    return new Promise(resolve => {
+      const img = new Image()
+      img.onload = img.onerror = resolve
+      img.src = src
+    })
+  })
+
+  return Promise.all(promises)
+}
+
 

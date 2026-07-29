@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { preloadSiteImages } from './utils/imagePreloader'
+import SiteLoader from './components/SiteLoader'
 import AmbientBackground from './components/AmbientBackground'
 import Navbar from './components/Navbar'
 import IntroFrameSequence from './components/IntroFrameSequence'
@@ -62,6 +63,7 @@ export default function App() {
 
   return (
     <>
+      <SiteLoader />
       <AmbientBackground />
       <div className="page-wrapper">
         <Navbar />
@@ -77,3 +79,4 @@ export default function App() {
     </>
   )
 }
+

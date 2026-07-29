@@ -84,3 +84,59 @@ export function preloadSiteImages() {
     img.src = src
   })
 }
+
+/**
+ * Preloads all site assets (hero, sequence slides, wallpaper, dock icons)
+ * and returns a promise that resolves when all images AND document readyState complete.
+ */
+export function preloadAllSiteAssets(onProgress) {
+  if (typeof window === 'undefined') return Promise.resolve()
+
+  const allSrcs = [
+    ALL_SITE_IMAGES.hero,
+    ALL_SITE_IMAGES.s1,
+    ALL_SITE_IMAGES.s2,
+    ALL_SITE_IMAGES.s3,
+    ALL_SITE_IMAGES.demo1,
+    ALL_SITE_IMAGES.demo2,
+    ALL_SITE_IMAGES.demo3,
+    ALL_SITE_IMAGES.wallpaper,
+    ...ALL_SITE_IMAGES.dockIcons
+  ]
+
+  let loadedCount = 0
+  const total = allSrcs.length
+
+  const imagePromises = allSrcs.map(src => {
+    return new Promise(resolve => {
+      const img = new Image()
+      if (src === ALL_SITE_IMAGES.hero && 'fetchPriority' in img) {
+        img.fetchPriority = 'high'
+      }
+      img.onload = img.onerror = () => {
+        loadedCount++
+        if (onProgress) onProgress(loadedCount / total)
+        resolve()
+      }
+      img.src = src
+    })
+  })
+
+  // Also wait for window load event if document isn't ready
+  const windowLoadPromise = new Promise(resolve => {
+    if (document.readyState === 'complete') {
+      resolve()
+    } else {
+      window.addEventListener('load', resolve, { once: true })
+    }
+  })
+
+  // Maximum 4.5 second safety fallback to ensure page displays even under slow connection
+  const safetyTimeout = new Promise(resolve => setTimeout(resolve, 4500))
+
+  return Promise.race([
+    Promise.all([...imagePromises, windowLoadPromise]),
+    safetyTimeout
+  ])
+}
+
